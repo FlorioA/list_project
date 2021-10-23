@@ -16,6 +16,31 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="h-100 m-0 p-0">
+			{# <div class="col-md-2 bg-dark text-white"> #}
+				{{ render(controller('App\\Controller\\MainController:mainMenu')) }}
+                {# {{ render(controller('App\\Controller\\MainController:mainMenu',{
+					'routeName' : app.request.attributes.get('_route'),
+					'catId': app.request.attributes.get('id') ?? null 
+				})) }} #}
+			{# </div> #}
+
+			{# <div class="col-md-10">
+				{% for label, messages in app.flashes %}
+					{% for message in messages %}
+						<div class="flash-{{ label }} alert alert-{{ label }} alert-dismissible m-3 shadow-sm" role="alert">
+							{{ message }}
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+					{% endfor %}
+				{% endfor %} #}
+
+				<div class="container m-5" id="main_container">
+					{% block body %}{% endblock %}
+				</div>
+			{# </div> #}
+		</div>
+
+        {% block my_javascripts %}{% endblock %}
     </body>
 </html>
