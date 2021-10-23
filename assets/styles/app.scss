@@ -1,0 +1,17 @@
+// customize some Bootstrap variables
+// On peut changer les variables de bootstrap (cf doc boostrap pour les connaître) avant de charger bootstrap
+$primary: darken(#00c4e2, 20%);
+$danger: darken(#ff822e, 20%);
+$success: darken(#da4fbe, 20%);
+
+// $body-bg: #f3f3a5;
+$dark: #0C1B33;
+
+// the ~ allows you to reference things in node_modules
+@import "~bootstrap/scss/bootstrap";
+
+
+html, body {
+    height: 100%;
+    background-color: #FFFBDB;
+}
