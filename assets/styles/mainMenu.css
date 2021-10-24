@@ -2,8 +2,6 @@
     position: sticky;
     top: 10px;
     left: 45px;
-    height: 37px;
-    width: 37px;
     text-align: center;
     border-radius: 3px;
     cursor: pointer;
@@ -139,19 +137,7 @@
 
 #main_container {
     z-index: 1;
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #202020; */
-    /* z-index: -1; */
-    /* text-align: center */
 }
-
-/* html, body {
-    height: 100%;
-    margin: 0;
-} */
 
 #active_sidebar_div {
     position: absolute;

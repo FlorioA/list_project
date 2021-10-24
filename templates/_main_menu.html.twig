@@ -1,92 +1,41 @@
-{# <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark container-fluid">
-	<div class="d-flex justify-content-between">
-		<a href="/" class="mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-			<span class="fs-4">ALP-3wa</span>
-		</a>
-		<button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-			<i class="fas fa-bars"></i>
-		</button>
-	</div>
-	<div class="collapse show" id="navbarToggler">
-		<hr>
-		<ul class="nav nav-pills flex-column mb-auto">
-			<li class="nav-item">
-				<a href="" class="nav-link text-white" aria-current="page">
-					<i class="fas fa-home"></i>
-					Home
-				</a>
-			</li>
-
-			<li class="nav-item dropdown">
-				<a href="#" class="nav-link text-white dropdown-toggle" id="dropdownCategories" data-bs-toggle="dropdown" aria-expanded="false" aria-current="page">
-					<i class="fas fa-sun"></i>
-					Categories
-				</a>
-
-				<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownCategories">
-						<li>
-							<a href=""></a>
-						</li>
-
-					<li><hr class="dropdown-divider"></li>
-
-						<li>
-							<a href=""></a>
-						</li>
-				</ul>
-			</li>
-			
-			{% if is_granted('ROLE_ADMIN') %}
-				<li class="nav-item">
-					<a href="" class="nav-link {{ route_name == 'statistics' ? 'active' }} text-white" aria-current="page">
-						<i class="fas fa-chart-bar"></i>
-						Statistics
-					</a>
-				</li>
-			{% endif %}
-
-		</ul>
-		<hr>
-
-		{% if app.user %}
-
-		<div class="dropdown">
-			<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-				<img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-				<strong>{{ app.user.name }}</strong>
-			</a>
-			<ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-				<li>
-					<a class="dropdown-item" href="">Se déconnecter</a>
-				</li>
-			</ul>
-		</div>
-
-		{% else %}
-			<a href="" class="p-3 text-white text-decoration-none">Se connecter</a>
-
-		{% endif %}
-	</div>
-</div> #}
-
-<div class="btn bg-dark text-white" id="nav_btn"> <span class="fas fa-bars"></span> </div>
-<nav id="sidebar" class="sidebar bg-dark">
+<button class="btn bg-dark text-white" id="nav_btn"> <span class="fas fa-bars"></span> </button>
+<nav id="sidebar" class="bg-dark">
     <div class="text"> ALP - 3wa </div>
-    <ul class="main_side">
-        <li class="active"><a href="{{ path('home') }}">Home</a></li>
-        {# <li> <a href="#" id="1">Pages <span class="fas fa-caret-down"></span> </a>
-            <ul class="item-show-1">
-                <li><a href="#">Contact us</a></li>
-                <li><a href="#">Our Team</a></li>
-            </ul>
-        </li> #}
-		{% if app.user %}
-        <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
-		{% else %}
-        <li><a href="{{ path('app_register') }}">Register</a></li>
-        <li><a href="{{ path('app_login') }}">Login</a></li>
-		{% endif %}
-    </ul>
+
+    <div class="container p-3">
+        <ul class="main_side p-0">
+            <li class="{{ route_name is same as 'home' ? 'active' : '' }}"><a href="{{ path('home') }}">Home</a></li>
+        </ul>
+
+        <ul class="main_side mt-5 p-0">
+            {% if app.user %}
+            <li>
+                <a href="#" id="user_dropdown">
+                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong>{{ app.user.name }}</strong>
+                    <span class="fas fa-caret-down"></span>
+                </a>
+                <ul class="item-show-user_dropdown">
+                    <li class="{{ route_name is same as 'user_detail' ? 'active' : '' }}"><a href="{{ path('user_detail', {'id': app.user.id}) }}">My Account</a></li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class=""><a href="">Admin</a></li>
+                    {% endif %}
+                    <li class="{{ route_name is same as 'app_logout' ? 'active' : '' }}"><a href="{{ path('app_logout') }}">Logout</a></li>
+                </ul>
+            </li>
+            {% else %}
+            <div class="row g-0">
+                <li class="col-6 {{ route_name is same as 'app_register' ? 'active' : '' }}">
+                    <a href="{{ path('app_register') }}" class="{{ route_name is same as 'app_register' ? 'active' : '' }}">Register</a>
+                </li>
+                <li class="col-6 {{ route_name is same as 'app_login' ? 'active' : '' }}">
+                    <a href="{{ path('app_login') }}" class="{{ route_name is same as 'app_login' ? 'active' : '' }}">Login</a>
+                </li>
+            </div>
+            {% endif %}
+        </ul>
+
+    </div>
 </nav>
 
 <div id="active_sidebar_div" class="d-none"></div>

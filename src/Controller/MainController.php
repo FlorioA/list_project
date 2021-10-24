@@ -21,8 +21,10 @@ class MainController extends AbstractController
     /**
      * @Route("/menu", name="main_menu")
      */
-    public function mainMenu()
+    public function mainMenu(string $routeName)
     {
-        return $this->render('_main_menu.html.twig', []);
+        return $this->render('_main_menu.html.twig', [
+            'route_name' => $routeName
+        ]);
     }
 }

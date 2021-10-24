@@ -1,4 +1,3 @@
-import './styles/app.scss';
 
 import 'bootstrap';
 require('@fortawesome/fontawesome-free/css/all.min.css');
@@ -10,3 +9,4 @@ global.$ = global.jQuery = $;
 // Mes fichiers
 import './styles/mainMenu.css';
 import './js/mainMenu';
+import './styles/app.scss';
