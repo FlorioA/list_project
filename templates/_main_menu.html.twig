@@ -11,7 +11,7 @@
             {% if app.user %}
             <li>
                 <a href="#" id="user_dropdown">
-                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <img src="{{ app.user.image ? asset('build/img/users/' ~ app.user.image) : asset('build/img/users/default-avatar.jpg') }}" alt="" width="32" height="32" class="rounded-circle me-2">
                     <strong>{{ app.user.name }}</strong>
                     <span class="fas fa-caret-down"></span>
                 </a>

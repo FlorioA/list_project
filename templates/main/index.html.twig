@@ -1,6 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}Hello!{% endblock %}
 
 {% block body %}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 pb-5">
+        {% for artwork in artworks %}
+            <div class="col mx-auto">
+                <div class="card h-100">
+                    <img src="{{ artwork.image ? asset('build/img/artworks/' ~ artwork.image) : asset('build/img/artworks/placeholder.jpg') }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ artwork.title }}</h5>
+
+                        <div class="text-muted fst-italic">
+                            {% for media in artwork.medias %}
+                                {{ media.name }}{{ not loop.last ? ', ' }}
+                            {% endfor %}
+                        </div>
+
+                        <p class="card-text">{{ artwork.description }}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -29,6 +29,11 @@ class Media
      */
     private $artworks;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
     public function __construct()
     {
         $this->artworks = new ArrayCollection();
@@ -71,6 +76,18 @@ class Media
     public function removeArtwork(Artwork $artwork): self
     {
         $this->artworks->removeElement($artwork);
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

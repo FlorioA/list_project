@@ -13,8 +13,8 @@
                     <img
                         src="{{
                             user.image ?
-                            asset('img/users/' ~ user.image) :
-                            asset('img/users/default-avatar.jpg') 
+                            asset('build/img/users/' ~ user.image) :
+                            asset('build/img/users/default-avatar.jpg') 
                         }}"
                         class="img img-responsive full-width img-thumbnail rounded-circle"
                         alt="Your profile picture"
@@ -23,7 +23,11 @@
             </div>
 
             <div class="col-xl-9">
-                <a class="btn btn-outline-primary btn-sm" href="{{ path('user_edit', {'id': user.id}) }}">Edit Profile</a>
+                <h4 class="text-center">{{ user.name }}</h4>
+                <div class="d-flex justify-content-between">
+                    <div>{{ user.email }}</div>
+                    <a class="btn btn-outline-primary btn-sm" href="{{ path('user_edit', {'id': user.id}) }}">Edit Profile</a>
+                </div>
             </div>
 
         </div>
