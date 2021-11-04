@@ -1,10 +1,11 @@
 // customize some Bootstrap variables
 // On peut changer les variables de bootstrap (cf doc boostrap pour les connaître) avant de charger bootstrap
-$primary: darken(#d705eb, 20%);
+
+$info: darken(#d705eb, 20%);
+$primary: darken(#1278ec, 20%);
 $danger: darken(#ff822e, 20%);
 $success: darken(#4fda94, 20%);
 
-// $body-bg: #f3f3a5;
 $dark: #0C1B33;
 
 // the ~ allows you to reference things in node_modules
@@ -13,7 +14,7 @@ $dark: #0C1B33;
 
 html, body {
     height: 100%;
-    background-color: #FFFBDB;
+    background-color: #fcebcd;
 }
 
 .avatar-img-detail {
@@ -25,4 +26,15 @@ html, body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.seen_token {
+    float: left !important;
+    position: absolute !important;
+    left: 5px;
+    top: 0px;
+    // z-index: 1000;
+    // background-color: #92AD40;
+    padding: 5px;
+    font-size: large;
 }

@@ -1,0 +1,43 @@
+<div class="col">
+
+    {% set seen = listed_artwork ? listed_artwork.seen %}
+    {% set seen_color = seen ? 'success' : 'info' %}
+
+    <div class="card h-100 shadow-sm {{ listed_artwork and (seen == true or seen == false) ? 'border border-' ~ seen_color }}">
+        <div class="seen_token text-success {{ not seen ? 'd-none' }}"><i class="fas fa-check"></i></div>
+
+        <img src="{{ artwork.image ? asset('build/img/artworks/' ~ artwork.image) : asset('build/img/artworks/placeholder.jpg') }}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <div class="small text-muted fst-italic text-end">
+                {% for media in artwork.medias %}
+                    {{ media.name }}{{ not loop.last ? ', ' }}
+                {% endfor %}
+            </div>
+            <h5 class="card-title">{{ artwork.title }}</h5>
+            <h6>
+                {% for author in artwork.authors %}
+                    {{ author.name }}{{ not loop.last ? ', ' }}
+                {% endfor %}
+            </h6>
+
+            <p class="card-text">{{ artwork.description }}</p>
+        </div>
+        {% if app.user %}
+            <div class="card-footer d-flex justify-content-between">
+                {% if listed_artwork %}
+                    <div class="btn-group btn-group-sm" role="group">
+                        <a title="Move to 'To see' list" href="{{ path('listed_artwork_update', {'userId': app.user.id, 'id': artwork.id, 'seen': 0}) }}" class="btn btn-outline-{{ seen_color }} {{ not seen ? 'disabled' }}"><i class="far fa-eye"></i></a>
+                        <a title="Move to 'Seen' list" href="{{ path('listed_artwork_update', {'userId': app.user.id, 'id': artwork.id, 'seen': 1}) }}" class="btn btn-outline-{{ seen_color }} {{ seen ? 'disabled' }}"><i class="fas fa-check"></i></a>
+                        <a title="Remove from list" href="{{ path('listed_artwork_remove', {'userId': app.user.id, 'id': artwork.id}) }}" class="btn btn-outline-{{ seen_color }}"><i class="fas fa-times"></i></a>
+                    </div>
+                {% else %}
+                    <span class="fw-bold">Add to list :</span>
+                    <div class="btn-group btn-group-sm" role="group">
+                        <a title="Add to list 'To see'" href="{{ path('listed_artwork_add', {'userId': app.user.id, 'id': artwork.id, 'seen': 0}) }}" class="btn btn-outline-primary"><i class="far fa-eye"></i></a>
+                        <a title="Add to list 'Seen'" href="{{ path('listed_artwork_add', {'userId': app.user.id, 'id': artwork.id, 'seen': 1}) }}" class="btn btn-outline-primary"><i class="fas fa-check"></i></a>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</div>

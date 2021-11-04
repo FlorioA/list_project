@@ -28,7 +28,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/settings", name="user_detail")
+     * @Route("/{id}/detail", name="user_detail")
      */
     public function settingsDetail(User $user): Response
     {

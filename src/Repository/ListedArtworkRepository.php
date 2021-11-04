@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Artwork;
 use App\Entity\ListedArtwork;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,32 +21,14 @@ class ListedArtworkRepository extends ServiceEntityRepository
         parent::__construct($registry, ListedArtwork::class);
     }
 
-    // /**
-    //  * @return ListedArtwork[] Returns an array of ListedArtwork objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findOneByArtworkUser(Artwork $artwork, User $user)
     {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('la')
+            ->andWhere('la.artwork = :artwork')
+            ->andWhere('la.user = :user')
+            ->setParameter('artwork', $artwork)
+            ->setParameter('user', $user)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getOneOrNullResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?ListedArtwork
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

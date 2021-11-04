@@ -16,25 +16,23 @@
         {% endblock %}
     </head>
     <body>
-        <div class="h-100 g-0 m-0 p-0">
-			{{ render(controller('App\\Controller\\MainController:mainMenu', {
-				'routeName' : app.request.attributes.get('_route'),
-			})) }}
+        {{ render(controller('App\\Controller\\MainController:mainMenu', {
+            'routeName' : app.request.attributes.get('_route'),
+        })) }}
 
-			{% for label, messages in app.flashes %}
-				{% for message in messages %}
-					<div class="flash-{{ label }} alert alert-{{ label }} alert-dismissible m-3 shadow-sm w-75 ms-auto" role="alert" style="position:relative; top: -40px;">
-						{{ message }}
-						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-					</div>
-				{% endfor %}
-			{% endfor %}
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash-{{ label }} alert alert-{{ label }} alert-dismissible m-3 shadow-sm w-75 ms-auto" role="alert" style="position:relative; top: -40px;">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endfor %}
 
-			<h2 class="text-end me-5 pe-5 fw-light text-muted mb-5 pb-5">{% block my_title %}{% endblock %}</h2>
-			<div class="container" id="main_container">
-				{% block body %}{% endblock %}
-			</div>
-		</div>
+        <h2 class="text-end m-5 fw-light text-muted">{% block my_title %}{% endblock %}</h2>
+        <div class="container" id="main_container">
+            {% block body %}{% endblock %}
+        </div>
 
         {% block my_javascripts %}{% endblock %}
     </body>

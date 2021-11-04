@@ -7,6 +7,4 @@ const $ = require('jquery');
 global.$ = global.jQuery = $;
 
 // Mes fichiers
-import './styles/mainMenu.css';
-import './js/mainMenu';
 import './styles/app.scss';

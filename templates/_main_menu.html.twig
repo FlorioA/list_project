@@ -1,42 +1,46 @@
-<button class="btn bg-dark text-white" id="nav_btn"> <span class="fas fa-bars"></span> </button>
-<nav id="sidebar" class="bg-dark">
-    <div class="text"> ALP - 3wa </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">List Project</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="container p-3">
-        <ul class="main_side p-0">
-            <li class="{{ route_name is same as 'home' ? 'active' : '' }}"><a href="{{ path('home') }}">Home</a></li>
-        </ul>
-
-        <ul class="main_side mt-5 p-0">
-            {% if app.user %}
-            <li>
-                <a href="#" id="user_dropdown">
-                    <img src="{{ app.user.image ? asset('build/img/users/' ~ app.user.image) : asset('build/img/users/default-avatar.jpg') }}" alt="" width="32" height="32" class="rounded-circle me-2">
-                    <strong>{{ app.user.name }}</strong>
-                    <span class="fas fa-caret-down"></span>
-                </a>
-                <ul class="item-show-user_dropdown">
-                    <li class="{{ route_name is same as 'user_detail' ? 'active' : '' }}"><a href="{{ path('user_detail', {'id': app.user.id}) }}">My Account</a></li>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li class=""><a href="">Admin</a></li>
-                    {% endif %}
-                    <li class="{{ route_name is same as 'app_logout' ? 'active' : '' }}"><a href="{{ path('app_logout') }}">Logout</a></li>
-                </ul>
-            </li>
-            {% else %}
-            <div class="row g-0">
-                <li class="col-6 {{ route_name is same as 'app_register' ? 'active' : '' }}">
-                    <a href="{{ path('app_register') }}" class="{{ route_name is same as 'app_register' ? 'active' : '' }}">Register</a>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+                <li class="nav-item">
+                    <a class="nav-link {{ route_name is same as 'home' ? 'active' : '' }}" href="{{ path('home') }}">Home</a>
                 </li>
-                <li class="col-6 {{ route_name is same as 'app_login' ? 'active' : '' }}">
-                    <a href="{{ path('app_login') }}" class="{{ route_name is same as 'app_login' ? 'active' : '' }}">Login</a>
-                </li>
-            </div>
-            {% endif %}
-        </ul>
-
+                {% if app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link {{ route_name is same as 'listed_artwork_list' ? 'active' : '' }}" href="{{ path('listed_artwork_list', {'userId': app.user.id}) }}">My list</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll">
+                {% if app.user %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{{ app.user.image ? asset('build/img/users/' ~ app.user.image) : asset('build/img/users/default-avatar.jpg') }}" alt="" width="32" height="32" class="rounded-circle me-2">
+                            <strong>{{ app.user.name }}</strong>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                            <li class="{{ route_name is same as 'user_detail' ? 'active' : '' }}"><a class="dropdown-item" href="{{ path('user_detail', {'id': app.user.id}) }}">My Account</a></li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li><a class="dropdown-item" href="">Admin</a></li>
+                            {% endif %}
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="{{ route_name is same as 'app_logout' ? 'active' : '' }}"><a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link {{ route_name is same as 'app_register' ? 'active' : '' }}" href="{{ path('app_register') }}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ route_name is same as 'app_login' ? 'active' : '' }}" href="{{ path('app_login') }}">Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
 </nav>
-
-<div id="active_sidebar_div" class="d-none"></div>
-
