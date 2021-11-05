@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Form\ArtworkSearchType;
 use App\Repository\ArtworkRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,13 +20,24 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $artworks = $this->artworkRepository->findAll();
+        $form = $this->createForm(ArtworkSearchType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $searchArtwork = $form->get('search_artwork')->getData();
+            $searchAuthor = $form->get('search_author')->getData();
+            $media = $form->get('media')->getData();
+
+            $artworks = $this->artworkRepository->searchQuery($searchArtwork, $searchAuthor, $media);
+        } else {
+            $artworks = $this->artworkRepository->findAllOrderedBy('title');
+        }
 
         return $this->render('main/index.html.twig', [
+            'form' => $form->createView(),
             'artworks' => $artworks,
-            'controller_name' => 'MainController',
         ]);
     }
 

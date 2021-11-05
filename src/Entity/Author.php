@@ -34,6 +34,12 @@ class Author
      */
     private $validated;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="authors")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->artworks = new ArrayCollection();
@@ -88,6 +94,18 @@ class Author
     public function setValidated(?\DateTimeInterface $validated): self
     {
         $this->validated = $validated;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

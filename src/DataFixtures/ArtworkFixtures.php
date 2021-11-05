@@ -10,7 +10,6 @@ use App\Entity\Author;
 use App\Entity\Artwork;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Symfony\Component\Validator\Constraints\Date;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
@@ -36,7 +35,7 @@ class ArtworkFixtures extends Fixture implements OrderedFixtureInterface
                 ->setTitle($faker->words(rand(1, 4), true))
                 ->setDescription($faker->paragraph(rand(2, 5)))
                 ->setValidated(new DateTime())
-                ->addMedia($media)
+                ->setMedia($media)
                 ->addAuthor($author)
                 ->setUser($user)
                 ->setImage('placeholder.jpg');

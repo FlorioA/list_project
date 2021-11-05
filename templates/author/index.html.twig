@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Your authors{% endblock %}
+{% block my_title %}Your authors{% endblock %}
+
+{% block body %}
+    <div class="m-3">
+        <a class="btn btn-sm btn-outline-primary" href="{{ path('author_new', {'userId': app.user.id}) }}">Create author</a>
+    </div>
+    <div class="card mb-5">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Validated</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for author in authors %}
+                        <tr>
+                            <td>
+                                <h5>{{ author.name }}</h5>
+                            </td>
+                            <td>
+                                {% if author.validated %}
+                                    <h4 class="text-success"><i class="fas fa-check"></i></h4>
+                                {% else %}
+                                    <h4 class="text-danger"><i class="fas fa-times"></i></h4>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <a title="Edit author" class="btn btn-sm btn-outline-primary" href="{{ path('author_edit', {'userId': app.user.id, 'id': author.id}) }}"><i class="fas fa-edit"></i></a>
+                                    <a title="Delete author" class="btn btn-sm btn-outline-danger" href="{{ path('author_delete', {'userId': app.user.id, 'id': author.id}) }}"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -19,6 +19,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class UserController extends AbstractController
 {
     private EntityManagerInterface $em;
+
     private SluggerInterface $slugger;
 
     public function __construct(EntityManagerInterface $em, SluggerInterface $slugger)

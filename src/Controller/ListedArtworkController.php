@@ -33,11 +33,11 @@ class ListedArtworkController extends AbstractController
     }
 
     /**
-     * @Route("/", name="listed_artwork_list")
+     * @Route("/{seen}", name="listed_artwork_list")
      */
-    public function index(User $user): Response
+    public function index(User $user, bool $seen): Response
     {
-        $listedArtworks = $this->artworkRepository->findByUser($user);
+        $listedArtworks = $this->artworkRepository->findByUserBySeen($user, $seen);
 
         return $this->render('listed_artwork/index.html.twig', [
             'artworks' => $listedArtworks,

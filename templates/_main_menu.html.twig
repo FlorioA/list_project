@@ -11,25 +11,37 @@
                     <a class="nav-link {{ route_name is same as 'home' ? 'active' : '' }}" href="{{ path('home') }}">Home</a>
                 </li>
                 {% if app.user %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {{ route_name is same as 'listed_artwork_list' ? 'active' : '' }}" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            My lists
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                            <a class="dropdown-item" href="{{ path('listed_artwork_list', {'userId': app.user.id, 'seen': 1 }) }}">Artworks seen</a>
+                            <a class="dropdown-item" href="{{ path('listed_artwork_list', {'userId': app.user.id, 'seen': 0 }) }}">Artworks to see</a>
+                        </ul>
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ route_name is same as 'listed_artwork_list' ? 'active' : '' }}" href="{{ path('listed_artwork_list', {'userId': app.user.id}) }}">My list</a>
+                        <a class="nav-link {{ route_name is same as 'artworks_show' ? 'active' : '' }}" href="{{ path('artworks_show', {'userId': app.user.id}) }}">Artworks created</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ route_name is same as 'authors_show' ? 'active' : '' }}" href="{{ path('authors_show', {'userId': app.user.id}) }}">Authors created</a>
                     </li>
                 {% endif %}
             </ul>
             <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll">
                 {% if app.user %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle {{ route_name is same as 'user_detail' ? 'active' : '' }}" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ app.user.image ? asset('build/img/users/' ~ app.user.image) : asset('build/img/users/default-avatar.jpg') }}" alt="" width="32" height="32" class="rounded-circle me-2">
-                            <strong>{{ app.user.name }}</strong>
+                            <span>{{ app.user.name }}</span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                            <li class="{{ route_name is same as 'user_detail' ? 'active' : '' }}"><a class="dropdown-item" href="{{ path('user_detail', {'id': app.user.id}) }}">My Account</a></li>
+                            <li><a class="dropdown-item" href="{{ path('user_detail', {'id': app.user.id}) }}">My Account</a></li>
                             {% if is_granted('ROLE_ADMIN') %}
                                 <li><a class="dropdown-item" href="">Admin</a></li>
                             {% endif %}
                             <li><hr class="dropdown-divider"></li>
-                            <li class="{{ route_name is same as 'app_logout' ? 'active' : '' }}"><a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a></li>
+                            <li><a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a></li>
                         </ul>
                     </li>
                 {% else %}

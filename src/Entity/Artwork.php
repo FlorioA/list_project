@@ -45,9 +45,10 @@ class Artwork
     private $validated;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Media::class, mappedBy="artworks")
+     * @ORM\ManyToOne(targetEntity=Media::class, inversedBy="artworks")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $medias;
+    private $media;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="artworks")
@@ -63,7 +64,7 @@ class Artwork
     public function __construct()
     {
         $this->authors = new ArrayCollection();
-        $this->medias = new ArrayCollection();
+        // $this->medias = new ArrayCollection();
         $this->listedArtworks = new ArrayCollection();
     }
 
@@ -148,28 +149,16 @@ class Artwork
     }
 
     /**
-     * @return Collection|Media[]
+     * @return Media
      */
-    public function getMedias(): Collection
+    public function getMedia(): ?Media
     {
-        return $this->medias;
+        return $this->media;
     }
 
-    public function addMedia(Media $media): self
+    public function setMedia(?Media $media): self
     {
-        if (!$this->medias->contains($media)) {
-            $this->medias[] = $media;
-            $media->addArtwork($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMedia(Media $media): self
-    {
-        if ($this->medias->removeElement($media)) {
-            $media->removeArtwork($this);
-        }
+        $this->media = $media;
 
         return $this;
     }

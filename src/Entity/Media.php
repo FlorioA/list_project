@@ -25,7 +25,7 @@ class Media
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Artwork::class, inversedBy="medias")
+     * @ORM\OneToMany(targetEntity=Artwork::class, mappedBy="media")
      */
     private $artworks;
 

@@ -22,7 +22,7 @@
 
         {% for label, messages in app.flashes %}
             {% for message in messages %}
-                <div class="flash-{{ label }} alert alert-{{ label }} alert-dismissible m-3 shadow-sm w-75 ms-auto" role="alert" style="position:relative; top: -40px;">
+                <div class="flash-{{ label }} alert alert-{{ label }} alert-dismissible m-3 shadow-sm w-75 mx-auto" role="alert">
                     {{ message }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>

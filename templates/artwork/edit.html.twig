@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New artwork{% endblock %}
+{% block my_title %}New artwork{% endblock %}
+
+{% block body %}
+    <div class="card mb-5">
+        <div class="card-body">
+            {{ form_start(form) }}
+
+            <div class="row">
+                <div class="col-lg-4">
+                    {{ form_row(form.title) }}
+                </div>
+                <div class="col-lg-4">
+                    {{ form_row(form.image) }}
+                </div>
+                <div class="col-lg-4">
+                    {{ form_row(form.media) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    {{ form_row(form.description) }}
+                </div>
+                <div class="col-lg-6">
+                    {{ form_row(form.authors) }}
+                </div>
+            </div>
+
+            {{ form_rest(form) }}
+
+            <button type="submit" class="btn btn-sm btn-outline-primary">Create artwork</button>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

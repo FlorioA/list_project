@@ -1,8 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello!{% endblock %}
+{% block title %}Welcome{% endblock %}
+{% block my_title %}Welcome to Project List !{% endblock %}
 
 {% block body %}
+    {{ form_start(form) }}
+
+    <div class="row pb-3 mb-3 border-bottom border-dark">
+        <div class="col-lg-4">
+            {{ form_row(form.search_artwork) }}
+        </div>
+        <div class="col-lg-4">
+            {{ form_row(form.search_author) }}
+        </div>
+        <div class="col-lg-3">
+            {{ form_row(form.media) }}
+        </div>
+        <div class="col-lg-1 align-self-end">
+            <div class="mb-3">
+                <button type="submit" class="btn btn-sm btn-outline-secondary">Search</button>
+            </div>
+        </div>
+    </div>
+
+    {{ form_rest(form) }}
+
+    {{ form_end(form) }}
+
+
+
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 pb-5">
         {% for artwork in artworks %}
             {% set listed = app.user ? get_listed_artwork(artwork, app.user) : null %}

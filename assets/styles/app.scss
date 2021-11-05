@@ -11,6 +11,9 @@ $dark: #0C1B33;
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
 
+@import "node_modules/select2/src/scss/core";
+@import "node_modules/select2-bootstrap-5-theme/src/include-all";
+
 
 html, body {
     height: 100%;
@@ -31,10 +34,9 @@ html, body {
 .seen_token {
     float: left !important;
     position: absolute !important;
-    left: 5px;
-    top: 0px;
-    // z-index: 1000;
-    // background-color: #92AD40;
-    padding: 5px;
+    left: 10px;
+    top: 10px;
     font-size: large;
+    background-color: white;
+    border-radius: 50%;
 }

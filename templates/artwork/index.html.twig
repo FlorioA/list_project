@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Your artworks{% endblock %}
+{% block my_title %}Your artworks{% endblock %}
+
+{% block body %}
+    <div class="m-3">
+        <a class="btn btn-sm btn-outline-primary" href="{{ path('artwork_new', {'userId': app.user.id}) }}">Create artwork</a>
+    </div>
+    <div class="card mb-5">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Infos</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Validated</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for artwork in artworks %}
+                        <tr>
+                            <td class="text-center">
+                                <img src="{{ artwork.image ? asset('build/img/artworks/' ~ artwork.image) : asset('build/img/artworks/placeholder.jpg') }}" class="rounded" style="max-width: 100px;">
+                            </td>
+                            <td>
+                                <h5>{{ artwork.title }}</h5>
+                                <h6>
+                                    {% for author in artwork.authors %}
+                                        {{ author.name }}{{ not loop.last ? ', ' }}
+                                    {% endfor %}
+                                </h6>
+                                <div class="text-muted fst-italic">{{ artwork.media.name }}</div>
+                            </td>
+                            <td>{{ artwork.description }}</td>
+                            <td>
+                                {% if artwork.validated %}
+                                    <h4 class="text-success"><i class="fas fa-check"></i></h4>
+                                {% else %}
+                                    <h4 class="text-danger"><i class="fas fa-times"></i></h4>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <a title="Edit artwork" class="btn btn-sm btn-outline-primary" href="{{ path('artwork_edit', {'userId': app.user.id, 'id': artwork.id}) }}"><i class="fas fa-edit"></i></a>
+                                    <a title="Delete artwork" class="btn btn-sm btn-outline-danger" href="{{ path('artwork_delete', {'userId': app.user.id, 'id': artwork.id}) }}"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
