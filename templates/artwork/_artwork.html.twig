@@ -3,8 +3,8 @@
     {% set seen = listed_artwork ? listed_artwork.seen %}
     {% set seen_color = seen ? 'success' : 'info' %}
 
-    <div class="card h-100 shadow-sm {{ listed_artwork and (seen == true or seen == false) ? 'border border-' ~ seen_color }}">
-        <div class="seen_token text-success px-2 py-1 {{ not seen ? 'd-none' }}"><i class="fas fa-check"></i></div>
+    <div class="card h-100 shadow-sm {{ app.user and listed_artwork and (seen == true or seen == false) ? 'border border-' ~ seen_color }}">
+        <div class="seen_token text-success px-2 py-1 {{ not app.user or not seen ? 'd-none' }}"><i class="fas fa-check"></i></div>
 
         <img src="{{ artwork.image ? asset('build/img/artworks/' ~ artwork.image) : asset('build/img/artworks/placeholder.jpg') }}" class="card-img-top" alt="...">
         <div class="card-body">

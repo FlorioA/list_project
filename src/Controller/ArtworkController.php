@@ -29,8 +29,6 @@ class ArtworkController extends AbstractController
 
     private MediaRepository $mediaRepository;
 
-    private AuthorRepository $authorRepository;
-
     private SluggerInterface $slugger;
 
     private EntityManagerInterface $em;
