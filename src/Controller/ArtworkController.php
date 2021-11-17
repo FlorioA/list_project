@@ -81,12 +81,6 @@ class ArtworkController extends AbstractController
             $artwork = new Artwork();
         }
 
-        $medias = $this->mediaRepository->findAll();
-        $mediasList = [];
-        foreach ($medias as $media) {
-            $mediasList[$media->getName()] = $media;
-        }
-
         $form = $this->createForm(ArtworkType::class, $artwork);
         $form->handleRequest($request);
 
